@@ -3,16 +3,36 @@ from word_distance import WordDistance
 
 class TestWordDistance(unittest.TestCase):
 
-    def setUp(self):
-        text = 'We do value and reward motivation in our development team. Development is a key skill for a DevOp.'
-        self.wd = WordDistance(text)
-
     def test_find_shortest_distance(self):
-        distance = self.wd.find_shortest_distance('motivation', 'development')
+        text = 'We do value and reward motivation in our development team. Development is a key skill for a DevOp.'
+        distance = WordDistance(text).find_shortest_distance('motivation', 'development')
         self.assertEqual(distance, 2)
 
     def test_find_shortest_distance_neighbors(self):
-        distance = self.wd.find_shortest_distance('We', 'do')
+        text = 'We do value and reward motivation in our development team. Development is a key skill for a DevOp.'
+        distance = WordDistance(text).find_shortest_distance('We', 'do')
         self.assertEqual(distance, 0)
+
+    def test_find_shortest_distance_startEqualsEnd(self):
+        text = 'We do value and reward motivation in our development team. Development is a key skill for a DevOp.'
+        distance = WordDistance(text).find_shortest_distance('motivation', 'motivation')
+        self.assertEqual(distance, -1)
+
+    def test_find_shortest_distance_emptyList(self):
+        distance = WordDistance('').find_shortest_distance('motivation', 'development')
+        self.assertEqual(distance, -1)
+
+    def test_find_shortest_distance_listWithOneElement(self):
+        distance = WordDistance('motivation').find_shortest_distance('motivation', 'development')
+        self.assertEqual(distance, -1)
+
+    def test_find_shortest_distance_startNotInList(self):
+        distance = WordDistance('We do development').find_shortest_distance('motivation', 'development')
+        self.assertEqual(distance, -1)
+
+    def test_find_shortest_distance_endNotInList(self):
+        distance = WordDistance('reward motivation in our team').find_shortest_distance('motivation', 'development')
+        self.assertEqual(distance, -1)
+
 if __name__ == '__main__':
     unittest.main()
