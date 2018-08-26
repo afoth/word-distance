@@ -8,6 +8,16 @@ class TestWordDistance(unittest.TestCase):
         distance = WordDistance(text).find_shortest_distance('motivation', 'development')
         self.assertEqual(distance, 2)
 
+    def test_find_shortest_distance_reversed(self):
+        text = 'We do value and reward motivation in our development team. Development is a key skill for a DevOp.'
+        distance = WordDistance(text).find_shortest_distance('development', 'motivation')
+        self.assertEqual(distance, 2)
+
+    def test_find_shortest_distance_caseInsensitive(self):
+        text = 'We do value and reward motivation in our development team. Development is a key skill for a DevOp.'
+        distance = WordDistance(text).find_shortest_distance('Motivation', 'Development')
+        self.assertEqual(distance, 2)
+
     def test_find_shortest_distance_neighbors(self):
         text = 'We do value and reward motivation in our development team. Development is a key skill for a DevOp.'
         distance = WordDistance(text).find_shortest_distance('We', 'do')

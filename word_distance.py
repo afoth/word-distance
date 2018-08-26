@@ -4,12 +4,14 @@ class WordDistance:
 
   def __init__(self, text):
     # extract words from given text
-    self.words = re.compile('\w+').findall(text)
+    self.words = re.compile('\w+').findall(text.lower())
 
   # finds shortest distance in number of words between start and end
   # returns -1 if start in the list and start equals end
   # returns -1 if start or end not in the list
   def find_shortest_distance(self, start, end):
+    start = start.lower()
+    end = end.lower()
     min_dist = -1
     last = -1
     # pre-checks
