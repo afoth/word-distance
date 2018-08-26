@@ -11,5 +11,8 @@ class TestWordDistance(unittest.TestCase):
         distance = self.wd.find_shortest_distance('motivation', 'development')
         self.assertEqual(distance, 2)
 
+    def test_find_shortest_distance_neighbors(self):
+        distance = self.wd.find_shortest_distance('We', 'do')
+        self.assertEqual(distance, 0)
 if __name__ == '__main__':
     unittest.main()
